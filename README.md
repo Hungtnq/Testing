@@ -64,7 +64,59 @@ Dưới đây là ví dụ về định dạng của mỗi bản ghi:
         	}
 }
 ``` 
- 
+
+Dữ liệu đã được gán nhãn được lưu trữ trong thư mục annotated_data dưới định dạng là tệp tin [`.json`](https://www.json.org) và được chia ra thành nhiều batch, cập nhật theo tháng và mỗi batch sẽ không có số lượng bản ghi cố định. Mỗi batch bao gồm 1 mảng chứa nhiều json và mỗi json và 1 bản ghi của bộ dữ liệu đã gán nhãn.
+
+| Key          | Type                   |        Include             | Description                                  |
+| ------------ | -----------------------| -------------------------- | -------------------------------------------- |
+| id           | string                 |         none               | id of each instance                          |
+| annotations  | array                  |          id                | id of class belong to specific instance      |
+|              |                        |         type               | type of annotation                           |
+|              |                        |         value              | value of annotation                          |
+|              |                        |        to_name             | type of the value of annotation              |
+|              |                        |       from_name            | name of the annotation                       |
+| data         | json                   |text, meta, uri, description| contain raw data info                        |
+
+Dưới đây là ví dụ về định dạng của mỗi bản ghi:
+```javascript
+{
+        "id": 785436,
+        "annotations": [
+            {
+                "id": "Eju0SNkpeb",
+                "type": "choices",
+                "value": {
+                    "choices": [
+                        "Trung tính"
+                    ]
+                },
+                "to_name": "text",
+                "from_name": "sentiment"
+            },
+            {
+                "id": "Hoip8he_f6",
+                "type": "choices",
+                "value": {
+                    "choices": [
+                        "Đời sống",
+                        "Xã hội",
+                        "Hóng biến"
+                    ]
+                },
+                "to_name": "text",
+                "from_name": "topic"
+            }
+        ],
+        "data": {
+            "meta": {
+                "uri": "https://toquoc.vn/cau-ca-nha-dai-nam-khoe-duoc-me-cho-di-choi-ngoi-trong-sieu-xe-rolls-royce-40-ty-ngam-co-ngoi-minh-se-thua-ke-trong-tuong-lai-222021299202526108.htm",
+                "description": "(Tổ Quốc) - Được biết, siêu xe mà bà chủ Đại Nam lái chở cậu con trai quý tử đi chơi là chiếc Rolls-Royce Wraith thuộc thế hệ đầu tiên, giá thị trường trước đó khoảng 40 tỷ đồng"
+            },
+            "text": "\"Cậu cả\" nhà Đại Nam khoe được mẹ chở đi chơi, ngồi trong siêu xe Rolls-Royce 40 tỷ ngắm \"cơ ngơi\" mình sẽ thừa kế trong tương lai"
+        }
+    }
+ ```
+  
 ## Quy trình dán nhãn
 - Bước 1: Đăng nhập.
 
